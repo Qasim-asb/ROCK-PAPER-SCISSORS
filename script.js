@@ -1,3 +1,5 @@
+import { triggerCelebration } from "./celebration.js";
+
 const choices = document.querySelectorAll(".choice-btn");
 const playerScore = document.querySelector("#player");
 const computerScore = document.querySelector("#computer");
@@ -19,10 +21,10 @@ function updateUI() {
   computerScore.innerText = score.computer;
   resultMsg.innerText = score.resultMsg;
   winnerMsg.innerText = score.winnerMsg;
-  resetBtn.innerText = score.resetBtnText; 
+  resetBtn.innerText = score.resetBtnText;
   winnerMsg.style.display = score.winnerMsg ? "block" : "none";
   choiceContainer.style.display = (score.player === 3 || score.computer === 3) ? "none" : "block";
-}
+};
 
 updateUI();
 
@@ -41,13 +43,13 @@ resetBtn.addEventListener("click", () => {
 const genCompChoice = () => {
   const options = ["rock", "paper", "scissors"];
   return options[Math.floor(Math.random() * 3)];
-}
+};
 
 const drawGame = (playerChoice) => {
   score.resultMsg = `It's a tie! Both chose ${playerChoice}! Play again`;
   localStorage.setItem("score", JSON.stringify(score));
   updateUI();
-}
+};
 
 const showWinner = (playerWin, playerChoice, compChoice) => {
   if (playerWin) {
@@ -56,6 +58,10 @@ const showWinner = (playerWin, playerChoice, compChoice) => {
   } else {
     score.computer++;
     score.resultMsg = `You lose! ${compChoice} beats your ${playerChoice}`;
+  }
+  
+  if (score.player === 3) {
+    triggerCelebration();
   }
 
   if (score.player === 3 || score.computer === 3) {
@@ -66,7 +72,7 @@ const showWinner = (playerWin, playerChoice, compChoice) => {
 
   localStorage.setItem("score", JSON.stringify(score));
   updateUI();
-}
+};
 
 const playGame = (playerChoice) => {
   const compChoice = genCompChoice();
@@ -84,7 +90,7 @@ const playGame = (playerChoice) => {
     }
     showWinner(playerWin, playerChoice, compChoice);
   }
-}
+};
 
 choices.forEach(choice => {
   choice.addEventListener("click", () => {

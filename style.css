@@ -15,9 +15,7 @@ ul {
   --step--1: clamp(0.7292rem, 0.6654rem + 0.319vw, 0.9377rem);
   --step-0: clamp(0.875rem, 0.7603rem + 0.5736vw, 1.25rem);
   --step-1: clamp(1.05rem, 0.8615rem + 0.9426vw, 1.6663rem);
-  --step-2: clamp(1.26rem, 0.966rem + 1.4702vw, 2.2211rem);
-  --step-3: clamp(1.512rem, 1.0688rem + 2.216vw, 2.9607rem);
-  --step-4: clamp(1.8144rem, 1.1621rem + 3.2616vw, 3.9467rem);
+  --step-2: clamp(1.512rem, 1.0688rem + 2.216vw, 2.9607rem);
 
   /* COLORS */
   --body-bg: linear-gradient(135deg, #ff6f61, #ffcc5c);
@@ -43,7 +41,7 @@ body {
 /* || TITLE */
 h1 {
   font-family: 'Luckiest Guy', cursive;
-  font-size: var(--step-3);
+  font-size: var(--step-2);
   color: var(--text-white);
   text-shadow: var(--text-shadow);
   margin-block: 0.3em;
