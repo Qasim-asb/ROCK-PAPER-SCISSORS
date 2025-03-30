@@ -7,18 +7,25 @@ const resetBtn = document.querySelector("#resetBtn");
 const resultMsg = document.querySelector("#results-msg");
 const winnerMsg = document.querySelector("#winner-msg");
 const choiceContainer = document.querySelector(".choice-container")
+const totalWins = document.querySelector("#total-wins");
 
-let score = JSON.parse(localStorage.getItem("score")) || {
-  player: 0,
-  computer: 0,
-  resultMsg: "Play your move",
-  winnerMsg: "",
-  resetBtnText: "Reset Game"
+const createScoreObject = (totalWins) => {
+  return {
+    player: 0,
+    computer: 0,
+    totalWins,
+    resultMsg: "Play your move",
+    winnerMsg: "",
+    resetBtnText: "Reset Game"
+  }
 };
+
+let score = JSON.parse(localStorage.getItem("score")) || createScoreObject(0);
 
 function updateUI() {
   playerScore.innerText = score.player;
   computerScore.innerText = score.computer;
+  totalWins.innerText = score.totalWins;
   resultMsg.innerText = score.resultMsg;
   winnerMsg.innerText = score.winnerMsg;
   resetBtn.innerText = score.resetBtnText;
@@ -29,14 +36,15 @@ function updateUI() {
 updateUI();
 
 resetBtn.addEventListener("click", () => {
-  score = {
-    player: 0,
-    computer: 0,
-    resultMsg: "Play your move",
-    winnerMsg: "",
-    resetBtnText: "Reset Game"
-  };
-  localStorage.removeItem("score");
+  
+  if (resetBtn.innerText === "Reset Game") {
+    score = createScoreObject(0);
+    localStorage.removeItem("score");
+  } else {
+    score = createScoreObject(score.totalWins);
+    localStorage.setItem("score", JSON.stringify(score));
+  }
+
   updateUI();
 });
 
@@ -59,8 +67,9 @@ const showWinner = (playerWin, playerChoice, compChoice) => {
     score.computer++;
     score.resultMsg = `You lose! ${compChoice} beats your ${playerChoice}`;
   }
-  
+
   if (score.player === 3) {
+    score.totalWins++;
     triggerCelebration();
   }
 

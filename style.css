@@ -106,11 +106,20 @@ main {
   color: var(--text-orange);
 }
 
+/* || TOTAL WINS */
+.total-wins {
+  text-align: center;
+  padding-block: 0.6em;
+  border-radius: 10px;
+  box-shadow: var(--button-shadow);
+}
+
+
 /* || CHOICE BUTTONS */
 .choice-container h2 {
   font-size: var(--step-1);
   color: var(--text-grey);
-  margin-bottom: 1em;
+  margin-block: 1em;
 }
 .choices {
   display: flex;
